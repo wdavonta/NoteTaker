@@ -3,19 +3,20 @@ const path = require('path');
 
 
 // this page you will do the app.get
-module.exports = function(app) {
+module.exports = (app) => {
 
+    
 app.get('/notes', (req, res) => {
-    res.sendFile(path.join(__dirname, './public/notes.html'));
+    res.sendFile(path.join(__dirname, "../public/notes.html"));
 });
 
 app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, "./public/index.html"));
+    res.sendFile(path.join(__dirname, "../public/index.html"));
   });
 
   
 app.get('/', (req,res) => {
-    res.sendFile(path.join(__dirname, '.Develop/public/index.html'));
+    res.sendFile(path.join(__dirname, "../public/index.html"));
 
 });
 
@@ -27,7 +28,7 @@ app.get('/api/notes/:id', (req, res) => {
 
 
 app.post('/api/notes', (req, res) => {
-    let saveInfo = JSON.parse(fs.readFileSync('./Develop/db/db.json', 'utf8'));
+    let saveInfo = JSON.parse(fs.readFileSync('./db/db.json', 'utf8'));
     let newData = req.body;
     notes.push('newData');
     let uniqueId = (saveInfo.length).toString();
@@ -39,7 +40,7 @@ app.post('/api/notes', (req, res) => {
 
 
         fs.writeFileSync
-            ('.db/db.json', JSON.stringify(saveInfo))
+            ('./db/db.json', JSON.stringify(saveInfo))
 
 
             res.json(newData);
