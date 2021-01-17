@@ -10,12 +10,12 @@ app.get('/notes', (req, res) => {
 });
 
 app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, './public/index.html'));
+    res.sendFile(path.join(__dirname, "Develop/public/index.html"));
   });
 
-
+  
 app.get('/', (req,res) => {
-    res.sendFile(path.join(__dirname, '.public/index.html'));
+    res.sendFile(path.join(__dirname, 'Develop/public/index.html'));
 
 });
 
@@ -27,12 +27,20 @@ app.get('/api/notes/:id', (req, res) => {
 
 
 app.post('/api/notes', (req, res) => {
-    const newData = req.body;
-    notes.push('data');
+    let saveInfo = JSON.parse(fs.readFileSync('./Develop/db/db.json', 'utf8'));
+    let newData = req.body;
+    notes.push('newData');
+    let uniqueId = (saveInfo.length).toString();
+    newNote.id = uniqueId;
+   
 
-    return res.json(newData);
 
 
-}) ;
 
 
+        fs.writeFileSync
+            ('.db/db.json', JSON.stringify(saveInfo))
+
+
+            res.json(newData);
+        });
